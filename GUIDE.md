@@ -37,7 +37,7 @@ The ones you would encounter the most are:
 
 ## Hello world
 
-As I said in the `INTRO.md`, the syntax is the same as in your shell (console) and you're free to use all the commands you know from there. In the example below you can see the familiar `echo` and `ls` being used.
+As I said in the `INTRO.md`, the syntax is the same as in your shell (console) and you're free to use all the commands you know from there. In the example below you can see the familiar commands `echo` and `ls`.
 
 ```sh
 #!/bin/sh
@@ -49,9 +49,61 @@ ls
 
 ## Variables
 
-Can be assigned with an equal sign and **no spaces**.
+It's important to mention that there are 2 types of variables:
+* Shell - available only to the current shell,
+* Environment - available to the current shell and child shells or processes.
+
+
+To assign a shell variable, use the equal sign and **no spaces**, otherwise you'll get a syntax error.
 
 ```sh
-language=shell
-
+LANGUAGE=shell
 ```
+
+To assign an environment variable:
+```sh
+EXPORT LANGUAGE=shell
+```
+
+Or if you'd like to make an existing shell variable environmental:
+```sh
+LANGUAGE=shell
+EXPORT LANGUAGE
+```
+
+You can also unset (delete) a variable:
+```sh
+unset LANGUAGE
+echo $LANGUAGE # nothing!
+```
+
+
+And you can assign a readonly variable, that prevents it from being modified or deleted
+```sh
+readonly LANGUAGE=shell
+LANGUAGE=javascript # won't be possible
+unset LANGUAGE # again not possible
+```
+
+Or make an existing variable, readonly
+```sh
+LANGUAGE=shell
+readonly LANGUAGE
+```
+
+
+And at last, if you want to assign a variable from stdin
+```sh
+read LANGUAGE
+echo $LANGUAGE
+```
+
+
+*By conventions, variables should be uppercase*
+
+## Magic variables?
+
+You should've seen shell scripts where strange variables like `$@` or `$$` were used.
+
+They have a purpose and that can be seen in this example script.
+[variable-arguments.sh](variable-arguments.sh)
