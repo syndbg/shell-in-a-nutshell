@@ -10,9 +10,10 @@ else
     echo "Unknown $1"
 fi
 
+
 # ^ Fires errors if no arguments are given.
 # To handle empty parameters use double quotes!
-if [ "$1" = non-empty ]; then
+if [ "$1" ]; then
     echo "You gave me - $1"
 else
     echo "You gave me - $1. Nothing!"
@@ -28,4 +29,10 @@ fi
 # Logical OR
 if [ "$1" = 3 ] || [ "$1" = 5 ]; then
     echo "I'm a psychic!"
+fi
+
+
+# Logical AND
+if [ "$2" ]  && [ "$2" ]; then
+    echo "I received two arguments"
 fi
