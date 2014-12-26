@@ -196,6 +196,30 @@ else
 fi
 ```
 
+And there's this very cool pattern-matching conditional - `case`.
+
+```sh
+case $1 in
+    what)
+        echo "This"
+        ;;
+    we|want)
+        echo "is"
+        ;;
+    to)
+        echo "so"
+        ;;
+    match*)
+        echo "cool"
+        ;;
+    *)
+        echo "!"
+        ;;
+esac
+```
+
+The `;;` are very important, don't miss them or you'll get a syntax error.
+
 
 ## Logical constructs
 
@@ -210,23 +234,121 @@ if [ "$1" = 3 ] || [ "$1" = 5 ]; then
 fi
 ```
 
+```sh
+if [ "$1" ] && [ "$2"]; then
+    echo "You gave me two arguments?"
+fi
+```
 
-## Testing conditions
 
-Testing equality only isn't that useful. We would like to be more flexibile in our logical conditions.
+## Loops
+
+There are two kinds of loops in Shell, `for each` and `while`. For better or worse, it's very similar to Python's situation.
+
+
+The template for `for each` loop is:
+
+```sh
+for var in one two three many_items; do
+    #action
+done
+```
+
+And the `while` loop:
+
+```sh
+while condition; do
+    #action
+done
+```
+
+
+## More testing conditions
+
+Only testing equality isn't that useful. We would like to be more flexibile in our logical conditions.
 
 We can test:
 * files,
 * strings,
-* arithmetics,
+* arithmetics.
+
+
+File type operators are:
+
+| Operator      | Tests for   |
+| ------------- |:-------------:|
+| -b      | block device    |
+| -c      | character device |
+| -d      | directory      |
+| -e     | existance |
+| -f     | regular file |
+| -h     | symbolic link |
+| -p     | named pipe |
+| -S     | socket |
 
 
 
+File permissions operators are:
+
+| Operator      | Tests for   |
+| ------------- |:-------------:|
+| -g     | setguid |
+| -k     | sticky |
+| -r      | readable |
+| -u     | setuid |
+| -w      | writable |
+| -x     | executable |
+
+
+Usage:
+
+```sh
+if [ -r $filename ]; do
+    echo $filename
+fi
+```
+
+
+String tests:
+
+| Operator      | Returns true if   |
+| ------------- |:-------------:|
+| -z     | empty |
+| -n     | not empty |
+
+
+Arithmetic tests:
+
+| Operator      | Returns true if first argument is.. to second |
+| ------------- |:-------------:|
+| -eq     | equal |
+| -ne     | not equal |
+| -gt     | greater than |
+| -lt     | lesser than |
+| -ge     | greater than or equal |
+| -le     | lesser than or equal |
+
+
+## Command substitution
+
+We can get a command's stdout and assign it to a variable or use it as a condition.
+
+To do so:
+```sh
+USER=$(whoami)
+if [ $USER ]; then
+    echo "Logged in as $USER"
+fi
+```
 
 
 ## Arithmetics
 
-`sh` supports arithmetics, just like other programming languages do:
+`sh` supports arithmetics, just like other programming languages do.
+
+Now that we understand `command substitution`, we can do arithmetics.
+
+The supported operations are:
 
 * `+` addition,
 * `-` subtraction,
@@ -242,7 +364,7 @@ echo $a
 # The above will remain a string and won't be evaluated
 ```
 
-If we want to evaluate an expression we must use the `expr` command.
+If we want to evaluate an expression we must use the a substitution of `expr` command.
 ```sh
 a=$(expr 5 + 4)
 echo $a

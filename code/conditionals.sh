@@ -36,3 +36,19 @@ fi
 if [ "$2" ]  && [ "$2" ]; then
     echo "I received two arguments"
 fi
+
+
+# Pattern-matching case conditional
+read INPUT
+
+case $INPUT in
+    potato)
+        echo "Salad!"
+        ;;
+    chunky|bacon)
+        echo "Chunky bacon!"
+        ;;
+    *)
+        echo "Que?"
+        ;;
+esac
