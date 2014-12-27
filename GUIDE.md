@@ -263,6 +263,14 @@ done
 ```
 
 
+And the not so standard, `until` loop. Think of it as a negative `while`.
+
+```sh
+until condition; do
+    #action
+done
+```
+
 ## More testing conditions
 
 Only testing equality isn't that useful. We would like to be more flexibile in our logical conditions.
@@ -391,4 +399,13 @@ But you can give them a desired file name template or location.
 ```sh
 tmpfile=$(mktemp ~/delete.XXXXX)
 # The Xses will be replaced by the same amount of random characters
+```
+
+
+## Includes
+
+Are as simple as. The command below will run all the functions in the file
+
+```sh
+. file.sh
 ```
