@@ -1,7 +1,9 @@
 shell-in-a-nutshell
 ===================
 
-Basic shell scripts to get you scripting
+Basic shell script guide to get you scripting.
+
+It's WIP, so opening issues and pull requests is appreciated.
 
 
 
