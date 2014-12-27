@@ -369,3 +369,26 @@ If we want to evaluate an expression we must use the a substitution of `expr` co
 a=$(expr 5 + 4)
 echo $a
 ```
+
+
+## Temporary files
+
+Are useful if you want to capture a command's output to a file.
+Temporary files are usually created in the `/tmp/` folder and deleted on reboot.
+But if you want to delete them sooner, you must do so manually.
+
+You create temporary files using `mktemp`, which is part of `GNU coreutils`.
+
+By default the filenames are tmp.<random_hash>
+
+```sh
+tmpfile=$(mktemp)
+# /tmp/tmp.T2RKRfdYeN
+```
+
+But you can give them a desired file name template or location.
+
+```sh
+tmpfile=$(mktemp ~/delete.XXXXX)
+# The Xses will be replaced by the same amount of random characters
+```
